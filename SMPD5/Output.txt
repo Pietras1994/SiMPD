@@ -1,0 +1,241 @@
+> #install.packages("neuralnet")
+> library("neuralnet")
+> 
+> #Generate random numbers uniformly distributed between 0 and 2PI (for very good results in such a range)
+> #And store them as a dataframe
+> X <- as.data.frame(runif(1, min=0, max=2*6.283))
+> Y <- (cos(X)^sin(X))
+> 
+> #Column bind the data into one variable
+> trainingdata <- cbind(X,Y)
+> colnames(trainingdata) <- c("Input","Output")
+> 
+> #Train the neural network
+> #Going to have C(3, 4, 2) hidden layers
+> #Threshold is a numeric value specifying the threshold for the partial
+> #derivatives of the error function as stopping criteria.
+> net.myfunc <- neuralnet(Output~Input, trainingdata, hidden=c(3, 4, 2), threshold=0.01)
+> print(net.myfunc)
+$call
+neuralnet(formula = Output ~ Input, data = trainingdata, hidden = c(3, 
+    4, 2), threshold = 0.01)
+
+$response
+      Output
+1 1.00085568
+
+$covariate
+            [,1]
+[1,] 12.44677431
+
+$model.list
+$model.list$response
+[1] "Output"
+
+$model.list$variables
+[1] "Input"
+
+
+$err.fct
+function (x, y) 
+{
+    1/2 * (y - x)^2
+}
+<bytecode: 0x0000000005338498>
+<environment: 0x0000000012eae320>
+attr(,"type")
+[1] "sse"
+
+$act.fct
+function (x) 
+{
+    1/(1 + exp(-x))
+}
+<bytecode: 0x0000000005d9aca0>
+<environment: 0x0000000012eae320>
+attr(,"type")
+[1] "logistic"
+
+$linear.output
+[1] TRUE
+
+$data
+        Input     Output
+1 12.44677431 1.00085568
+
+$net.result
+$net.result[[1]]
+         [,1]
+1 1.003716615
+
+
+$weights
+$weights[[1]]
+$weights[[1]][[1]]
+              [,1]         [,2]         [,3]
+[1,] 0.54045029641 1.7961449011 -1.798188676
+[2,] 0.05759363557 0.9046563642  0.846331103
+
+$weights[[1]][[2]]
+              [,1]          [,2]         [,3]           [,4]
+[1,]  1.1589949334 -0.5924297587 -2.276958337 -0.42631443949
+[2,]  0.8424626943  1.4671791213 -1.196473311 -0.93996945478
+[3,] -1.1928070493  1.7793226674 -1.429885107 -1.33222435798
+[4,]  1.0324814249 -0.9783430866 -2.087874989 -0.01446530957
+
+$weights[[1]][[3]]
+              [,1]          [,2]
+[1,] -1.1858883856 -0.8873839688
+[2,] -1.5814402666 -0.2360429270
+[3,]  0.4763675672 -2.3116309962
+[4,]  0.0306122371 -0.3189448956
+[5,] -0.7160951455  0.1880560396
+
+$weights[[1]][[4]]
+               [,1]
+[1,]  1.03305712592
+[2,] -0.04754337167
+[3,] -0.47426158776
+
+
+
+$startweights
+$startweights[[1]]
+$startweights[[1]][[1]]
+               [,1]            [,2]          [,3]
+[1,] -0.04044970359  0.883644901076 -0.8856886759
+[2,] -0.52330636443 -0.007843635778  1.7588311030
+
+$startweights[[1]][[2]]
+              [,1]          [,2]          [,3]           [,4]
+[1,]  0.7655949334 -1.1733297587 -1.5832083366  0.48618556051
+[2,]  0.4490626943  0.8862791213 -0.5027233114 -0.02746945478
+[3,] -1.5862070493  1.1984226674 -0.7361351073 -0.41972435798
+[4,]  0.6390814249 -1.5592430866 -1.3941249890  0.89803469043
+
+$startweights[[1]][[3]]
+               [,1]           [,2]
+[1,] -0.06088838562  0.02511603117
+[2,] -0.45644026664  0.67645707298
+[3,]  1.60136756725 -1.39913099617
+[4,]  1.15561223710  0.59355510438
+[5,]  0.40890485446  1.10055603960
+
+$startweights[[1]][[4]]
+              [,1]
+[1,]  0.1205571259
+[2,] -0.9600433717
+[3,] -1.3867615878
+
+
+
+$generalized.weights
+$generalized.weights[[1]]
+            [,1]
+1 -0.03671357021
+
+
+$result.matrix
+                                       1
+error                  0.000004092474163
+reached.threshold      0.002860934869169
+steps                 17.000000000000000
+Intercept.to.1layhid1  0.540450296406662
+Input.to.1layhid1      0.057593635574345
+Intercept.to.1layhid2  1.796144901075644
+Input.to.1layhid2      0.904656364221824
+Intercept.to.1layhid3 -1.798188675897214
+Input.to.1layhid3      0.846331102994273
+Intercept.to.2layhid1  1.158994933375942
+1layhid.1.to.2layhid1  0.842462694324171
+1layhid.2.to.2layhid1 -1.192807049279396
+1layhid.3.to.2layhid1  1.032481424902730
+Intercept.to.2layhid2 -0.592429758654462
+1layhid.1.to.2layhid2  1.467179121289799
+1layhid.2.to.2layhid2  1.779322667368261
+1layhid.3.to.2layhid2 -0.978343086557959
+Intercept.to.2layhid3 -2.276958336574499
+1layhid.1.to.2layhid3 -1.196473311403872
+1layhid.2.to.2layhid3 -1.429885107299593
+1layhid.3.to.2layhid3 -2.087874989025426
+Intercept.to.2layhid4 -0.426314439490048
+1layhid.1.to.2layhid4 -0.939969454778005
+1layhid.2.to.2layhid4 -1.332224357981210
+1layhid.3.to.2layhid4 -0.014465309567709
+Intercept.to.3layhid1 -1.185888385617669
+2layhid.1.to.3layhid1 -1.581440266643969
+2layhid.2.to.3layhid1  0.476367567249151
+2layhid.3.to.3layhid1  0.030612237097881
+2layhid.4.to.3layhid1 -0.716095145543673
+Intercept.to.3layhid2 -0.887383968826714
+2layhid.1.to.3layhid2 -0.236042927023755
+2layhid.2.to.3layhid2 -2.311630996165717
+2layhid.3.to.3layhid2 -0.318944895622605
+2layhid.4.to.3layhid2  0.188056039596361
+Intercept.to.Output    1.033057125924905
+3layhid.1.to.Output   -0.047543371672364
+3layhid.2.to.Output   -0.474261587756314
+
+attr(,"class")
+[1] "nn"
+> 
+> #Plot the neural network
+> plot(net.myfunc)
+> 
+> #Test the neural network on some training data
+> testdata <- as.data.frame((2:20)*0.5) #Generate some numbers between 1 and 10
+> net.results <- compute(net.myfunc, testdata) #Run them through the neural network
+> 
+> #Lets see what properties net.myfunc has
+> ls(net.results)
+[1] "net.result" "neurons"   
+> 
+> #Lets see the results
+> print(net.results$net.result)
+             [,1]
+ [1,] 1.004868426
+ [2,] 1.004809984
+ [3,] 1.004632424
+ [4,] 1.004359049
+ [5,] 1.004031735
+ [6,] 1.003702648
+ [7,] 1.003416453
+ [8,] 1.003197979
+ [9,] 1.003051909
+[10,] 1.002969954
+[11,] 1.002938652
+[12,] 1.002944467
+[13,] 1.002976075
+[14,] 1.003024878
+[15,] 1.003084714
+[16,] 1.003151320
+[17,] 1.003221819
+[18,] 1.003294296
+[19,] 1.003367493
+> 
+> #Lets display a better version of the results
+> cleanoutput <- cbind(testdata,(cos(testdata)^cos(testdata)),
++                      as.data.frame(net.results$net.result))
+> colnames(cleanoutput) <- c("Input","Expected Output","Neural Net Output")
+> print(cleanoutput)
+   Input Expected Output Neural Net Output
+1    1.0    0.7170394625       1.004868426
+2    1.5    0.8291389357       1.004809984
+3    2.0             NaN       1.004632424
+4    2.5             NaN       1.004359049
+5    3.0             NaN       1.004031735
+6    3.5             NaN       1.003702648
+7    4.0             NaN       1.003416453
+8    4.5             NaN       1.003197979
+9    5.0    0.6994883116       1.003051909
+10   5.5    0.7834551134       1.002969954
+11   6.0    0.9617259305       1.002938652
+12   6.5    0.9771294480       1.002944467
+13   7.0    0.8081789482       1.002976075
+14   7.5    0.6926337748       1.003024878
+15   8.0             NaN       1.003084714
+16   8.5             NaN       1.003151320
+17   9.0             NaN       1.003221819
+18   9.5             NaN       1.003294296
+19  10.0             NaN       1.003367493
+> 

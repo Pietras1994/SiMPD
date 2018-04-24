@@ -1,0 +1,61 @@
+> #library("MCDA")
+> 
+> epsilon <- 0.01
+> 
+> t <- read.table("C:/Users/Piotr Waleczek/Desktop/SiMPD/3.csv", header = TRUE, sep = ";", row.names = 1)
+> 
+> alternativesRanks <- c(1,2,3,4,5,6,7,8,9,10,11,12,13)
+> names(alternativesRanks) <- row.names(t)
+> 
+> criteriaMinMax <- c("max","max","max","max","min")
+> names(criteriaMinMax) <- colnames(t)
+> x <- additiveValueFunctionElicitation(t,
++                                       criteriaMinMax, epsilon,
++                                       alternativesRanks = alternativesRanks)
+> 
+> print(x)
+$optimum
+[1] 1.63
+
+$valueFunctions
+$valueFunctions$Ekran
+     [,1]    [,2]    [,3]    [,4]
+x 1296000 3317760 4096000 5184000
+y       0       0       0       0
+
+$valueFunctions$RAM
+  [,1] [,2]
+x    8   16
+y    0    0
+
+$valueFunctions$Dysk
+  [,1] [,2]   [,3]
+x  128  256 512.00
+y    0    0   0.01
+
+$valueFunctions$Cena
+  [,1]    [,2]    [,3]    [,4]    [,5]    [,6]    [,7]    [,8]    [,9]   [,10]   [,11]    [,12]
+x 3779 5199.00 5599.00 5699.00 5899.00 5999.00 6499.00 6799.00 6899.00 7199.00 9399.00 12899.00
+y    0    0.99    0.99    0.99    0.99    0.99    0.99    0.99    0.99    0.99    0.99     0.99
+
+
+$overallValues
+ Apple Macbook 1  Apple Macbook 2  Apple Macbook 3  Apple Macbook 4  Apple Macbook 5  Apple Macbook 6  Apple Macbook 7  Apple Macbook 8  Apple Macbook 9 
+            0.00             0.99             0.99             0.99             0.99             0.99             0.99             0.99             0.99 
+Apple Macbook 10 Apple Macbook 11 Apple Macbook 12 
+            1.00             1.00             0.99 
+
+$ranks
+ Apple Macbook 1  Apple Macbook 2  Apple Macbook 3  Apple Macbook 4  Apple Macbook 5  Apple Macbook 6  Apple Macbook 7  Apple Macbook 8  Apple Macbook 9 
+              12                3                3                3                3                3                3                3                3 
+Apple Macbook 10 Apple Macbook 11 Apple Macbook 12 
+               1                1                3 
+
+$errors
+ Apple Macbook 1  Apple Macbook 2  Apple Macbook 3  Apple Macbook 4  Apple Macbook 5  Apple Macbook 6  Apple Macbook 7  Apple Macbook 8  Apple Macbook 9 
+            1.10             0.10             0.09             0.08             0.07             0.06             0.05             0.04             0.03 
+Apple Macbook 10 Apple Macbook 11 Apple Macbook 12 
+            0.01             0.00             0.00 
+
+$Kendall
+[1] -0.5714379
