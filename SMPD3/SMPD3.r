@@ -1,0 +1,7 @@
+library(ahp)
+mackAhp <- Load('MackBooks.ahp')
+Calculate(mackAhp)
+print(mackAhp, priority = function(x) x$sparent$priority["total", x$name])
+Visualize(mackAhp)
+Analyze(mackAhp)
+AnalyzeTable(mackAhp)

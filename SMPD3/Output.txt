@@ -1,0 +1,73 @@
+> library(ahp)
+> mackAhp <- Load('MackBooks.ahp')
+> Calculate(mackAhp)
+> print(mackAhp, priority = function(x) x$sparent$priority["total", x$name])
+            levelName priority
+1  Zakup mackbooka          NA
+2   ¦--Ekran                NA
+3   ¦   ¦--Mackbook1        NA
+4   ¦   ¦--Mackbook2        NA
+5   ¦   ¦--Mackbook3        NA
+6   ¦   ¦--Mackbook4        NA
+7   ¦   ¦--Mackbook5        NA
+8   ¦   ¦--Mackbook6        NA
+9   ¦   ¦--Mackbook7        NA
+10  ¦   ¦--Mackbook8        NA
+11  ¦   ¦--Mackbook9        NA
+12  ¦   ¦--Mackbook10       NA
+13  ¦   ¦--Mackbook11       NA
+14  ¦   °--Mackbook12       NA
+15  ¦--Ram                  NA
+16  ¦   ¦--Mackbook1        NA
+17  ¦   ¦--Mackbook2        NA
+18  ¦   ¦--Mackbook3        NA
+19  ¦   ¦--Mackbook4        NA
+20  ¦   ¦--Mackbook5        NA
+21  ¦   ¦--Mackbook6        NA
+22  ¦   ¦--Mackbook7        NA
+23  ¦   ¦--Mackbook8        NA
+24  ¦   ¦--Mackbook9        NA
+25  ¦   ¦--Mackbook10       NA
+26  ¦   ¦--Mackbook11       NA
+27  ¦   °--Mackbook12       NA
+28  ¦--Dysk                 NA
+29  ¦   ¦--Mackbook1        NA
+30  ¦   ¦--Mackbook2        NA
+31  ¦   ¦--Mackbook3        NA
+32  ¦   ¦--Mackbook4        NA
+33  ¦   ¦--Mackbook5        NA
+34  ¦   ¦--Mackbook6        NA
+35  ¦   ¦--Mackbook7        NA
+36  ¦   ¦--Mackbook8        NA
+37  ¦   ¦--Mackbook9        NA
+38  ¦   ¦--Mackbook10       NA
+39  ¦   ¦--Mackbook11       NA
+40  ¦   °--Mackbook12       NA
+41  °--Cena                 NA
+42      ¦--Mackbook1        NA
+43      ¦--Mackbook2        NA
+44      ¦--Mackbook3        NA
+45      ¦--Mackbook4        NA
+46      ¦--Mackbook5        NA
+47      ¦--Mackbook6        NA
+48      ¦--Mackbook7        NA
+49      ¦--Mackbook8        NA
+50      ¦--Mackbook9        NA
+51      ¦--Mackbook10       NA
+52      ¦--Mackbook11       NA
+53      °--Mackbook12       NA
+> Visualize(mackAhp)
+> Analyze(mackAhp)
+                  Weight Mackbook1 Mackbook2 Mackbook3 Mackbook4 Mackbook5 Mackbook12 Mackbook6 Mackbook11 Mackbook7 Mackbook10 Mackbook8 Mackbook9
+1 Zakup mackbooka 100.0%     25.3%     17.6%     12.3%      8.7%      6.3%       6.3%      4.7%       4.7%      3.7%       3.7%      3.3%      3.3%
+2  ¦--Dysk         33.1%     10.3%      7.1%      4.9%      3.4%      2.4%       0.2%      1.6%       0.3%      1.1%       0.4%      0.8%      0.5%
+3  ¦--Ram          24.1%      7.5%      5.2%      3.6%      2.5%      1.7%       0.1%      1.2%       0.2%      0.8%       0.3%      0.6%      0.4%
+4  ¦--Ekran        24.1%      7.5%      5.2%      3.6%      2.5%      1.7%       0.1%      1.2%       0.2%      0.8%       0.3%      0.6%      0.4%
+5  °--Cena         18.8%      0.1%      0.1%      0.2%      0.3%      0.4%       5.8%      0.6%       4.0%      0.9%       2.8%      1.3%      1.9%
+  Inconsistency
+1          5.8%
+2         53.2%
+3         53.2%
+4         53.2%
+5         53.2%
+> AnalyzeTable(mackAhp)
