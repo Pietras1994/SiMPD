@@ -1,0 +1,170 @@
+Version: 2.0
+
+#########################
+# Alternatives Section
+#
+
+Alternatives: &alternatives
+# Here, we list all the alternatives, together with their attributes. 
+# We can use these attributes later in the file when defining 
+# preferenceFunctions. The attributes can be quantitative or 
+# qualitative.
+  Mackbook1:
+    ekran: 1296000
+    ram: 8
+    dysk: 128
+    cena: 3779
+  Mackbook2:
+    ekran: 4096000
+    ram: 8
+    dysk: 128
+    cena: 5599
+  Mackbook3:
+    ekran: 4096000
+    ram: 8
+    dysk: 128
+    cena: 5699
+  Mackbook4:
+    ekran: 4096000
+    ram: 8
+    dysk: 256
+    cena: 6899
+  Mackbook5:
+    ekran: 1296000
+    ram: 8
+    dysk: 256
+    cena: 5199
+  Mackbook6:
+    ekran: 3317760
+    ram: 8
+    dysk: 256
+    cena: 5899
+  Mackbook7:
+    ekran: 4096000
+    ram: 8
+    dysk: 256
+    cena: 6799
+  Mackbook8:
+    ekran: 3317760
+    ram: 8
+    dysk: 256
+    cena: 6499
+  Mackbook9:
+    ekran: 3317760
+    ram: 8
+    dysk: 256
+    cena: 5999
+  Mackbook10:
+    ekran: 3317760
+    ram: 8
+    dysk: 512
+    cena: 7199
+  Mackbook11:
+    ekran: 5184000
+    ram: 16
+    dysk: 512
+    cena: 12899
+  Mackbook12:
+    ekran: 4096000
+    ram: 16
+    dysk: 256
+    cena: 9399
+
+#
+# End of Alternatives Section
+#####################################
+
+#####################################
+# Goal Section
+#
+
+
+Goal:
+# The goal spans a tree of criteria and the alternatives
+  name: Zakup mackbooka
+  description: >
+    This is a classic single decision maker problem. It models
+    the situation facing by a family that wants to buy a new mackbook.
+    
+  decision-makers:
+    - Ojciec: 0.4
+    - Matka: 0.3
+    - Dziecko: 0.3
+  preferences:
+    # preferences are typically defined pairwise
+    # 1 means: A is equal to B
+    # 9 means: A is highly preferrable to B
+    # 1/9 means: B is highly preferrable to A
+    Ojciec:
+      pairwise:
+       - [Ekran, Ram, 3]
+       - [Ram, Dysk, 3]
+       - [Dysk, Cena, 3]
+    Matka:
+      pairwise:
+       - [Ekran, Ram, 2]
+       - [Ram, Dysk, 2]
+       - [Dysk, Cena, 6]
+    Dziecko:
+      pairwise:
+       - [Ekran, Ram, 5]
+       - [Ram, Dysk, 5]
+       - [Dysk, Cena, 1]
+      
+  children: 
+    Ekran: 
+      preferences:
+        # Komentarz - metoda s³uzaca do porownywania ekranów mackbooków
+        Ojciec:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Ekran/a1$Ekran))
+        Matka:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Ekran/a1$Ekran))
+        Dziecko:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Ekran/a1$Ekran))
+      children: *alternatives
+    Ram: 
+      preferences:
+        # Komentarz - metoda s³uzaca do porownywania pojemnosci pamiêci RAM
+        Ojciec:
+          pairwiseFunction: 
+             function(a1, a2) max(9, max(1/9, a2$Ram/a1$Ram))
+        Matka:
+          pairwiseFunction: 
+             function(a1, a2) max(9, max(1/9, a2$Ram/a1$Ram))
+        Dziecko:
+          pairwiseFunction: 
+            function(a1, a2) max(9, max(1/9, a2$Ram/a1$Ram))
+      children: *alternatives
+    Dysk: 
+      preferences:
+        # Komentarz - metoda s³uzaca do porownywania w parach dysków mackbooków
+        Ojciec:
+          pairwiseFunction: 
+             function(a1, a2) max(9, max(1/9, a2$Dysk/a1$DYsk))
+        Matka:
+          pairwiseFunction: 
+             function(a1, a2) max(9, max(1/9, a2$Dysk/a1$DYsk))
+        Dziecko:
+          pairwiseFunction: 
+             function(a1, a2) max(9, max(1/9, a2$Dysk/a1$DYsk))
+      children: *alternatives
+    Cena: 
+      preferences:
+        # Komentarz - metoda s³uzaca do porownywania w parach cen mackbooków
+        Ojciec:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Cena/a1$Cena))
+        Matka:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Cena/a1$Cena))
+        Dziecko:
+          pairwiseFunction: 
+             function(a1, a2) min(9, max(1/9, a2$Cena/a1$Cena))
+      children: *alternatives
+
+#
+# End of Goal Section
+#####################################
