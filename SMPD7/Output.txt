@@ -1,0 +1,75 @@
+> library("C50")
+> data <- matrix(c(1296000, 4096000, 4096000, 4096000, 1296000, 3317760, 4096000, 3317760, 3317760, 3317760, 5184000, 4096000,
++                  8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 16, 16,
++                  128, 128, 128, 256, 256, 256, 256, 256, 256, 512, 512, 256,
++                  3779, 5599, 5699, 6899, 5199, 5899, 6799, 6499, 5999, 7199, 12899, 9399), 12, 4)
+> labels <- c("1", "2", "3", "4","5")
+> result <- c(1, 4, 5, 4, 3, 4, 1, 2, 3, 2, 3, 1)
+> test <- factor(result, labels)
+> colnames(data) <- c("Ekran", "RAM", "Dysk", "Cena")
+> treeModel <- C5.0(x = data[,], y = test)
+> treeModel
+
+Call:
+C5.0.default(x = data[, ], y = test)
+
+Classification Tree
+Number of samples: 12 
+Number of predictors: 4 
+
+Tree size: 4 
+
+Non-standard options: attempt to group attributes
+
+> summary(treeModel)
+
+Call:
+C5.0.default(x = data[, ], y = test)
+
+
+C5.0 [Release 2.07 GPL Edition]  	Tue May 15 16:18:32 2018
+-------------------------------
+
+Class specified by attribute `outcome'
+
+Read 12 cases (5 attributes) from undefined.data
+
+Decision tree:
+
+Dysk <= 128: 1 (3/2)
+Dysk > 128:
+:...Ekran > 3317760: 1 (4/2)
+    Ekran <= 3317760:
+    :...Cena <= 5999: 3 (3/1)
+        Cena > 5999: 2 (2)
+
+
+Evaluation on training data (12 cases):
+
+	    Decision Tree   
+	  ----------------  
+	  Size      Errors  
+
+	     4    5(41.7%)   <<
+
+
+	   (a)   (b)   (c)   (d)   (e)    <-classified as
+	  ----  ----  ----  ----  ----
+	     3                            (a): class 1
+	           2                      (b): class 2
+	     1           2                (c): class 3
+	     2           1                (d): class 4
+	     1                            (e): class 5
+
+
+	Attribute usage:
+
+	100.00%	Dysk
+	 75.00%	Ekran
+	 41.67%	Cena
+
+
+Time: 0.0 secs
+
+> plot(treeModel)
+> 
